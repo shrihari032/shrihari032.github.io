@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>For My Dearest Bestie ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --pink: #ffb6c1; --gold: #ffd700; --lavender: #e6e6fa; }
+        body, html { margin: 0; padding: 0; overflow: hidden; background: #05010a; font-family: 'Quicksand', sans-serif; color: white; }
+        
+        /* Landing Page Sprinkles Canvas */
+        #landing-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.8; }
+
+        #start-screen {
+            position: fixed; inset: 0; background: radial-gradient(circle, #0e021a 0%, #05010a 100%); z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        }
+
+        .content-page {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; opacity: 0; transition: 1.5s ease-in-out; pointer-events: none;
+            text-align: center;
+        }
+        .content-page.active { opacity: 1; pointer-events: all; }
+        
+        .text-container {
+            background: rgba(10, 2, 20, 0.75);
+            padding: 30px; border-radius: 40px; backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); max-width: 60%; z-index: 20;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* Seamless Photo Wall Styling */
+        .photo-wall {
+            position: absolute; inset: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 0; /* Removes grid line segments */
+            width: 100vw; height: 100vh;
+            z-index: 1; opacity: 0; transition: 2s ease;
+        }
+        .active .photo-wall { opacity: 0.5; }
+        
+        .photo-wall img {
+            width: 100%; height: 100%; object-fit: cover;
+            display: block; border: none; padding: 0; margin: 0;
+            filter: brightness(60%) contrast(110%);
+        }
+
+        .wall-overlay {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle, transparent 20%, rgba(5, 1, 10, 0.8) 100%);
+            z-index: 2; pointer-events: none;
+        }
+
+        #input_video {
+            position: absolute; bottom: 25px; right: 25px; width: 180px; height: 135px; border-radius: 20px;
+            transform: scaleX(-1); border: 2px solid rgba(255,255,255,0.15); z-index: 150; opacity: 0.4;
+        }
+        
+        button {
+            padding: 18px 45px; font-size: 1.5rem; background: transparent; 
+            border: 2px solid var(--pink); color: var(--pink); border-radius: 50px; cursor: pointer;
+            font-family: 'Dancing Script', cursive; display: none; margin-top: 20px; z-index: 1001;
+        }
+        button:hover { background: var(--pink); color: #05010a; box-shadow: 0 0 30px var(--pink); }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 0; color: var(--pink); }
+    </style>
+</head>
+<body>
+
+    <audio id="audio0" loop src="songs/page0song.mpeg"></audio>
+    <audio id="audio1" loop src="songs/page1song.mp3"></audio>
+    <audio id="audio2" loop src="songs/page2song.mp3"></audio>
+    <audio id="audio3" loop src="songs/page3song.mp3"></audio>
+    <audio id="audio4" loop src="songs/HappyBirthday.mp3"></audio>
+    <audio id="audio5" loop src="songs/page4song.mp3"></audio>
+    <audio id="countdownSong" loop src="songs/Countdown.mp3"></audio>
+
+    <div id="start-screen" onclick="document.getElementById('countdownSong').play()">
+		
+        <canvas id="landing-canvas"></canvas>
+        <h1 style="z-index: 10;">The Magic Begins In...</h1>
+        <div id="countdown-timer" style="font-size: 3rem; color: var(--gold); z-index: 10;">Loading...</div>
+		<p style="max-width: 400px; font-style: italic;">
+            Something small is about to begin…<br>not loud, not fancy—<br>
+            just a quiet little moment, made with care, meant only for you 🌷
+        </p>
+        <button id="begin-btn" onclick="init(event)">Open the Surprise</button>
+    </div>
+
+    <video id="input_video" playsinline></video>
+
+
+    <div class="content-page active" id="page0">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+			<img src="img/photo7.jpeg"><img src="img/photo5.jpeg"><img src="img/photo6.jpeg">
+            <img src="img/photo1.jpeg"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">  
+        </div>
+		<div class="text-container">
+            <h1>Out of all the people...</h1>
+            <p>Somehow, slowly, you became my person.</p>
+            <p>No announcement. No grand moment. Just conversations that felt easy, silences that never felt awkward, and a comfort that arrived without asking.</p>
+            <p>It felt less like coincidence and more like the universe gently nudging things into place. Like it always knew you’d matter.</p>
+            <!---<div class="gesture-hint">☝️ INDEX FINGER</div>--->
+        </div>
+	</div>
+    <div class="content-page" id="page1">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+			<img src="img/photo10.JPG"><img src="img/photo5.jpeg"><img src="img/photo11.JPG">
+            <img src="img/photo1.jpeg"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">  
+        </div>
+		<div class="text-container">
+            <h1>Your Magic 🤍</h1>
+            <p>You’re gentle in a world that rushes. Calm in moments that feel messy. And kind in ways that don’t ask for attention.</p>
+            <p>There’s something quietly special about you—the way you listen, the way you care, the way you stay soft without being weak.</p>
+            <p>Being rare doesn’t mean being loud. That’s your magic.</p>
+            <!---<div class="gesture-hint">✌️ PEACE SIGN</div>--->
+        </div>
+	</div>
+	
+	<div class="content-page" id="page5">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+            <img src="img/photo1.jpeg"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">
+            <img src="img/photo4.jpeg"><img src="img/photo5.jpeg"><img src="img/photo6.jpeg">
+        </div>
+        <div class="text-container">
+            <h1>Come be part of it 💕</h1>
+            <p>There will be smiles 😄, maybe a little chaos 🎈, and definitely some bad photos 📸. Laughter that won't make sense later, but memories we'll never actually forget.</p>
+            <p>Come make it brighter, louder, happier. It wouldn’t be the same without you.</p>	
+	    <p>Theme: Sand & Water.</p>
+	    <p>Date & Time: 17 January 2026 at 1700hrs.</p>
+            <!--<div class="gesture-hint">🤟 THREE FINGERS</div>-->
+        </div>
+    </div>
+	
+    <div class="content-page" id="page2">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+            <img src="img/photo10.JPG"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">
+            <img src="img/photo4.jpeg"><img src="img/photo5.jpeg"><img src="img/photo11.JPG">
+        </div>
+        <div class="text-container">
+            <h1>Our Journey 🌼</h1>
+            <p>It’s funny how the best memories never announce themselves. They show up as random moments—laughs that came out of nowhere and simple days that quietly became unforgettable.</p>
+            <p>I realize now—every step felt lighter just because you were there.</p>
+            <!---<div class="gesture-hint">🖐️ OPEN PALM</div>--->
+        </div>
+	</div>
+	
+    <div class="content-page" id="page3">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+			<img src="img/photo4.jpeg"><img src="img/photo5.jpeg"><img src="img/photo6.jpeg">
+            <img src="img/photo1.jpeg"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">  
+        </div>
+		<div class="text-container">
+            <h1>Steadier with You 🌙</h1>
+            <p>Not every day was easy. Some days felt heavy or confusing. But even then, your presence made things feel a little steadier.</p>
+            <p>You didn’t always fix things. You didn’t need to. You stayed. You listened. You existed right there—and somehow, that was enough.</p>
+            <!--<div class="gesture-hint">✊ FIST</div>-->
+        </div>
+	</div>
+	
+    <div class="content-page" id="page4">
+		<div class="photo-wall">
+            <div class="wall-overlay"></div>
+			<img src="img/photo7.jpeg"><img src="img/photo9.JPG"><img src="img/photo4.jpeg">
+            <img src="img/photo1.jpeg"><img src="img/photo2.jpeg"><img src="img/photo3.jpeg">  
+        </div>
+		<div class="text-container">
+			<h1>Happy Birthday 💖</h1>
+            <p>Thank you for being kind when it mattered. For being honest, even when it was hard. For being yourself—unapologetically, gently, beautifully you.</p>
+            <p>Stay silly. Stay warm. Stay exactly the way you are. The world already has enough noise—and you? You’re something rare and lovely 🌸</p>
+            <!--<div class="gesture-hint">🖐️🖐️ BOTH HANDS</div>-->
+		</div>
+	</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+    <script>
+        // --- 1. FLOATING SPRINKLES ---
+        const canvas = document.getElementById('landing-canvas');
+        const ctx = canvas.getContext('2d');
+        let sprinkles = [];
+        const sprinkleColors = ['#ffb6c1', '#ffd700', '#e6e6fa', '#b2f7ef', '#ff69b4'];
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+
+        class Sprinkle {
+            constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+            reset() {
+                this.x = Math.random() * canvas.width; this.y = -20;
+                this.width = Math.random() * 6 + 4; this.height = Math.random() * 12 + 8;
+                this.color = sprinkleColors[Math.floor(Math.random() * sprinkleColors.length)];
+                this.speed = Math.random() * 1.5 + 0.5; this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.05;
+            }
+            update() { this.y += this.speed; this.rotation += this.rotationSpeed; if (this.y > canvas.height + 20) this.reset(); }
+            draw() {
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation);
+                ctx.fillStyle = this.color; ctx.beginPath();
+                ctx.roundRect(-this.width/2, -this.height/2, this.width, this.height, 10);
+                ctx.fill(); ctx.restore();
+            }
+        }
+        for(let i=0; i<60; i++) sprinkles.push(new Sprinkle());
+        function animSprinkles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            sprinkles.forEach(s => { s.update(); s.draw(); });
+            if(document.getElementById('start-screen')) requestAnimationFrame(animSprinkles);
+        }
+        animSprinkles();
+
+        // --- 2. TIMER & OVERRIDE ---
+        const bday = new Date("Jan 16, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const diff = bday - new Date().getTime();
+            document.getElementById("countdown-timer").innerHTML = Math.floor(diff/(1000*60*60*24)) + "d " + Math.floor((diff%(1000*60*60*24))/(1000*60*60)) + "h " + Math.floor((diff%(1000*60*60))/(1000*60)) + "m " + Math.floor((diff%(1000*60))/1000) + "s";
+            if (diff < 0) document.getElementById("begin-btn").style.display = "block";
+        }, 1000);
+        //window.addEventListener('keydown', (e) => { if(e.key.toLowerCase() === 't') document.getElementById("begin-btn").style.display = "block"; });
+
+        // --- 3. THREE.JS & HAND TRACKING ---
+        let scene, camera, renderer, points, targetArray, posArray, colArray, globalScale = 1.0, currentPage = 0;
+        const PARTICLE_COUNT = 18000;
+        const colors = [new THREE.Color(0xaed9e0), new THREE.Color(0xffffff), new THREE.Color(0xff69b4), new THREE.Color(0xe6e6fa), new THREE.Color(0xffd700), new THREE.Color(0xb2f7ef)];
+
+        function switchMusic(idx) {
+            for(let i=0; i<=5; i++) {
+                const aud = document.getElementById('audio' + i);
+                if(aud) { i === idx ? aud.play().catch(e=>{}) : (aud.pause(), aud.currentTime = 0); }
+            }
+        }
+
+        function init(e) {
+            e.stopPropagation();
+            document.getElementById('countdownSong').pause();
+            document.getElementById('start-screen').remove();
+            
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            const geometry = new THREE.BufferGeometry();
+            posArray = new Float32Array(PARTICLE_COUNT * 3); targetArray = new Float32Array(PARTICLE_COUNT * 3); colArray = new Float32Array(PARTICLE_COUNT * 3);
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colArray, 3));
+            points = new THREE.Points(geometry, new THREE.PointsMaterial({ size: 0.038, vertexColors: true, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false }));
+            scene.add(points); camera.position.z = 6;
+            
+            setupShapes(0); switchMusic(0); startTracking(); animate();
+        }
+
+        function setupShapes(idx) {
+            const activeCol = colors[idx === 5 ? 5 : idx];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                colArray[i*3] = activeCol.r; colArray[i*3+1] = activeCol.g; colArray[i*3+2] = activeCol.b;
+                let x, y, z;
+                if(idx === 0) { // Sphere
+                    const phi = Math.acos(-1 + (2 * i) / PARTICLE_COUNT); const theta = Math.sqrt(PARTICLE_COUNT * Math.PI) * phi;
+                    x = 2.5 * Math.cos(theta) * Math.sin(phi); y = 2.5 * Math.sin(theta) * Math.sin(phi); z = 2.5 * Math.cos(phi);
+                } else if(idx === 1) { // Snowflake
+                    const a = (i % 6) * (Math.PI / 3); const r = Math.random() * 3.5;
+                    x = r * Math.cos(a); y = r * Math.sin(a); z = (Math.random()-0.5)*1.5;
+                } else if(idx === 5) { // Star
+                    const angle = (i/PARTICLE_COUNT)*Math.PI*2; const r = (i%2===0)?3:1.5;
+                    x = r*Math.cos(angle); y = r*Math.sin(angle); z = (Math.random()-0.5)*1.5;
+                } else if(idx === 2) { // Bloom
+                    const t = (i/PARTICLE_COUNT)*Math.PI*2; const r = 3.5 * Math.cos(2*t);
+                    x = r*Math.cos(t); y = r*Math.sin(t); z = (Math.random()-0.5)*1.5;
+                } else if(idx === 3) { // Tunnel
+                    const a = 0.1*i; const r = 0.01*i;
+                    x = r*Math.cos(a); y = (i/PARTICLE_COUNT)*6-3; z = r*Math.sin(a);
+                } else { // Heart
+                    const t = Math.random()*Math.PI*2;
+                    x = 16*Math.pow(Math.sin(t),3)*0.18; y = (13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*0.18; z = (Math.random()-0.5)*1.5;
+                }
+                targetArray[i*3] = x; targetArray[i*3+1] = y; targetArray[i*3+2] = z;
+            }
+            points.geometry.attributes.color.needsUpdate = true;
+        }
+
+        function startTracking() {
+            const video = document.getElementById('input_video');
+            const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+            hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.5 });
+            hands.onResults((res) => {
+                if (res.multiHandLandmarks && res.multiHandLandmarks.length > 0) {
+                    const h = res.multiHandLandmarks;
+                    const handSize = Math.sqrt(Math.pow(h[0][0].x - h[0][12].x, 2) + Math.pow(h[0][0].y - h[0][12].y, 2));
+                    globalScale = THREE.MathUtils.lerp(globalScale, THREE.MathUtils.mapLinear(handSize, 0.1, 0.4, 0.5, 2.5), 0.1);
+                    const countFingers = (hand) => {
+                        let c = 0; if (hand[8].y < hand[6].y) c++; if (hand[12].y < hand[10].y) c++;
+                        if (hand[16].y < hand[14].y) c++; if (hand[20].y < hand[18].y) c++; return c;
+                    };
+                    const f = countFingers(h[0]);
+                    let dp = -1;
+                    if (h.length === 2) dp = 4;
+                    else if (f === 1) dp = 0; else if (f === 2) dp = 1; else if (f === 3) dp = 5;
+                    else if (f >= 4) dp = 2; else if (f === 0) dp = 3;
+                    if (dp !== -1 && dp !== currentPage) {
+                        currentPage = dp;
+                        document.querySelectorAll('.content-page').forEach(p => p.classList.remove('active'));
+                        document.getElementById('page' + dp).classList.add('active');
+                        setupShapes(dp); switchMusic(dp);
+                    }
+                }
+            });
+            new Camera(video, { onFrame: async () => { await hands.send({image: video}); }, width: 640, height: 480 }).start();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const pos = points.geometry.attributes.position.array;
+            for (let i = 0; i < PARTICLE_COUNT * 3; i++) pos[i] += (targetArray[i] * globalScale - pos[i]) * 0.08;
+            points.geometry.attributes.position.needsUpdate = true;
+            points.rotation.y += 0.005; renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
